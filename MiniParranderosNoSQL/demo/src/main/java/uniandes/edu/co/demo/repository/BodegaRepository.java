@@ -32,6 +32,5 @@ public interface BodegaRepository extends MongoRepository<Bodega, String> {
     @Query(value = "{ 'sucursalId': ?0 }", fields = "{ 'nombreBodega': 1, 'tamanioBodega': 1 }")
     List<Map<String, Object>> obtenerIndiceOcupacionBodega(String idSucursal);
 
-    // Obtener documentos de ingreso de productos por sucursal y bodega (simulación de consulta avanzada)
    
 }

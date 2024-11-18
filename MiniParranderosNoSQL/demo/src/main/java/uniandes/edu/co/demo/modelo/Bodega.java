@@ -3,13 +3,13 @@ package uniandes.edu.co.demo.modelo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "bodegas")
+@Document(collection = "Bodegas")
 public class Bodega {
     @Id
     private String id;
     private String nombreBodega;
     private Float tamanioBodega;
-    private String sucursalId; // Referencia a la sucursal
+    private String sucursalId;  
 
     public Bodega() {}
 
