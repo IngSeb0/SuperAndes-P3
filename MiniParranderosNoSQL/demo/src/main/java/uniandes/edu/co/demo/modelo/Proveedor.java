@@ -1,35 +1,39 @@
 package uniandes.edu.co.demo.modelo;
 
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.io.Serializable;
 
-@Document(collection = "proveedor")  // Nombre de la colección en MongoDB
-public class Proveedor implements Serializable {
+import java.util.List;
+
+@ToString
+@Document(collection = "proveedores")
+public class Proveedor {
 
     @Id
-    private Long nit;
+    private String nit;
     private String nombre;
-    private String direccion;
-    private String nombreContacto;
-    private String telefonoContacto;
+    private String contacto;
+    private List<Producto> productos; // Referencia a productos
 
-    public Proveedor() {}
+    // Constructor sin parámetros
+    public Proveedor() {
+    }
 
-    public Proveedor(Long nit, String nombre, String direccion, String nombreContacto, String telefonoContacto) {
+    // Constructor con todos los parámetros
+    public Proveedor(String nit, String nombre, String contacto, List<Producto> productos) {
         this.nit = nit;
         this.nombre = nombre;
-        this.direccion = direccion;
-        this.nombreContacto = nombreContacto;
-        this.telefonoContacto = telefonoContacto;
+        this.contacto = contacto;
+        this.productos = productos;
     }
 
     // Getters y Setters
-    public Long getNit() {
+    public String getNit() {
         return nit;
     }
 
-    public void setNit(Long nit) {
+    public void setNit(String nit) {
         this.nit = nit;
     }
 
@@ -41,38 +45,19 @@ public class Proveedor implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getContacto() {
+        return contacto;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
     }
 
-    public String getNombreContacto() {
-        return nombreContacto;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setNombreContacto(String nombreContacto) {
-        this.nombreContacto = nombreContacto;
-    }
-
-    public String getTelefonoContacto() {
-        return telefonoContacto;
-    }
-
-    public void setTelefonoContacto(String telefonoContacto) {
-        this.telefonoContacto = telefonoContacto;
-    }
-
-    @Override
-    public String toString() {
-        return "Proveedor{" +
-                "nit=" + nit +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", nombreContacto='" + nombreContacto + '\'' +
-                ", telefonoContacto='" + telefonoContacto + '\'' +
-                '}';
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

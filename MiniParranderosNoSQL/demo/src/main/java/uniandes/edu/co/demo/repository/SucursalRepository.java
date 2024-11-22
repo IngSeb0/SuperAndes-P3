@@ -8,15 +8,17 @@ import java.util.List;
 
 public interface SucursalRepository extends MongoRepository<Sucursal, String> {
 
-    @Query("{}")
-    List<Sucursal> obtenerTodasLasSucursales();
+    // Buscar sucursales por ciudad (nombre exacto)
+    @Query("{'ciudad.nombre': ?0}")
+    List<Sucursal> findByCiudadNombre(String ciudadNombre);
 
-    @Query("{ 'idSucursal': ?0 }")
-    Sucursal obtenerSucursalPorId(String id);
+    // Buscar sucursales por dirección
+    @Query("{'direccion': ?0}")
+    List<Sucursal> findByDireccion(String direccion);
 
-    @Query("{ 'ciudad.codigoCiudad': ?0 }")
-    List<Sucursal> obtenerSucursalesPorCodigoCiudad(Integer codigoCiudad);
-
-    @Query("{ $or: [ { 'producto.idProducto': ?0 }, { 'producto.nombre': ?1 } ] }")
-    List<Sucursal> obtenerSucursalesConProductoDisponible(String productoId, String nombreProducto);
+    // Buscar sucursales que contengan una bodega específica (por nombre de bodega)
+    @Query("{'bodegas.nombre': ?0}")
+    List<Sucursal> findByBodegaNombre(String bodegaNombre);
+    @Query("{'_id': ?0}")
+    Sucursal findSucursalWithBodegas(String sucursalId);
 }

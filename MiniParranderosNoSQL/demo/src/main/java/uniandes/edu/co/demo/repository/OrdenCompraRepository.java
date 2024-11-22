@@ -3,16 +3,19 @@ package uniandes.edu.co.demo.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import uniandes.edu.co.demo.modelo.OrdenCompra;
+
 import java.util.List;
 
 public interface OrdenCompraRepository extends MongoRepository<OrdenCompra, String> {
 
-    @Query("{}")
-    List<OrdenCompra> obtenerTodasLasOrdenes();
+    @Query("{'sucursal._id': ?0}")
+    List<OrdenCompra> findBySucursalId(String sucursalId);
 
-    @Query("{ '_id': ?0 }")
-    OrdenCompra obtenerOrdenPorId(String id);
 
-    @Query("{ 'proveedor.nit': ?0 }")
-    List<OrdenCompra> obtenerOrdenesPorProveedor(String nit);
+    @Query("{'proveedor._id': ?0}")
+    List<OrdenCompra> findByProveedorId(String proveedorId);
+
+
+    @Query("{'fechaCreacion': {$gte: ?0, $lte: ?1}}")
+    List<OrdenCompra> findByFechaCreacionBetween(String fechaInicio, String fechaFin);
 }

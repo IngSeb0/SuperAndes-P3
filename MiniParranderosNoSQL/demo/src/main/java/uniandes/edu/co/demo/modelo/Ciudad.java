@@ -1,42 +1,39 @@
 package uniandes.edu.co.demo.modelo;
 
-import org.springframework.data.annotation.Id;
+import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Ciudades")
+@ToString
+@Document(collection = "ciudades")
 public class Ciudad {
-    @Id
-    private Integer codigoCiudad;
-    private String nombreCiudad;
 
-    public Ciudad() {}
+    private String nombre;
+    private String codigo;
 
-    public Ciudad(Integer codigoCiudad, String nombreCiudad) {
-        this.codigoCiudad = codigoCiudad;
-        this.nombreCiudad = nombreCiudad;
+    // Constructor sin parámetros
+    public Ciudad() {
     }
 
-    public Integer getCodigoCiudad() {
-        return codigoCiudad;
+    // Constructor con todos los parámetros
+    public Ciudad(String nombre, String codigo) {
+        this.nombre = nombre;
+        this.codigo = codigo;
     }
 
-    public void setCodigoCiudad(Integer codigoCiudad) {
-        this.codigoCiudad = codigoCiudad;
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getNombreCiudad() {
-        return nombreCiudad;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setNombreCiudad(String nombreCiudad) {
-        this.nombreCiudad = nombreCiudad;
+    public String getCodigo() {
+        return codigo;
     }
 
-    @Override
-    public String toString() {
-        return "Ciudad{" +
-                "codigoCiudad=" + codigoCiudad +
-                ", nombreCiudad='" + nombreCiudad + '\'' +
-                '}';
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }

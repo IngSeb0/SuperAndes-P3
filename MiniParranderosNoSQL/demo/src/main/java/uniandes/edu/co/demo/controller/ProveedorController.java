@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uniandes.edu.co.demo.modelo.Proveedor;
 import uniandes.edu.co.demo.repository.ProveedorRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -16,67 +14,33 @@ public class ProveedorController {
     @Autowired
     private ProveedorRepository proveedorRepository;
 
-    // Obtener todos los proveedores
     @GetMapping
-    public ResponseEntity<List<Proveedor>> obtenerProveedores() {
-        try {
-            List<Proveedor> proveedores = proveedorRepository.obtenerTodosLosProveedores();
-            return new ResponseEntity<>(proveedores, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public List<Proveedor> getAllProveedores() {
+        return proveedorRepository.findAll();
     }
 
-    // Obtener un proveedor por NIT
-    @GetMapping("/{nit}")
-    public ResponseEntity<Proveedor> obtenerProveedorPorNit(@PathVariable("nit") Long nit) {
-        Proveedor proveedor = proveedorRepository.obtenerProveedorPorNit(nit);
-        if (proveedor != null) {
-            return new ResponseEntity<>(proveedor, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @PostMapping
+    public Proveedor createProveedor(@RequestBody Proveedor proveedor) {
+        return proveedorRepository.save(proveedor);
     }
 
-    // Insertar un nuevo proveedor
-    @PostMapping("/new/save")
-    public ResponseEntity<String> insertarProveedor(@RequestBody Proveedor proveedor) {
-        try {
-            proveedorRepository.save(proveedor);
-            return new ResponseEntity<>("Proveedor creado exitosamente", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al crear el proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/{id}")
+    public Proveedor getProveedorById(@PathVariable String id) {
+        return proveedorRepository.findById(id).orElse(null);
     }
 
-    // Actualizar un proveedor por NIT
-    @PutMapping("/{nit}/edit")
-    public ResponseEntity<String> actualizarProveedor(@PathVariable("nit") Long nit, @RequestBody Proveedor proveedor) {
-        try {
-            if (proveedorRepository.existsById(nit)) {
-                proveedor.setNit(nit);
-                proveedorRepository.save(proveedor);
-                return new ResponseEntity<>("Proveedor actualizado exitosamente", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Proveedor no encontrado", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al actualizar el proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PutMapping("/{id}")
+    public Proveedor updateProveedor(@PathVariable String id, @RequestBody Proveedor updatedProveedor) {
+        return proveedorRepository.findById(id).map(proveedor -> {
+            proveedor.setNombre(updatedProveedor.getNombre());
+            proveedor.setContacto(updatedProveedor.getContacto());
+            proveedor.setProductos(updatedProveedor.getProductos());
+            return proveedorRepository.save(proveedor);
+        }).orElse(null);
     }
 
-    // Eliminar un proveedor por NIT
-    @DeleteMapping("/{nit}/delete")
-    public ResponseEntity<String> eliminarProveedor(@PathVariable("nit") Long nit) {
-        try {
-            if (proveedorRepository.existsById(nit)) {
-                proveedorRepository.deleteById(nit);
-                return new ResponseEntity<>("Proveedor eliminado exitosamente", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Proveedor no encontrado", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar el proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @DeleteMapping("/{id}")
+    public void deleteProveedor(@PathVariable String id) {
+        proveedorRepository.deleteById(id);
     }
 }

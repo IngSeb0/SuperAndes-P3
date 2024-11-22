@@ -1,54 +1,51 @@
 package uniandes.edu.co.demo.modelo;
 
-import org.springframework.data.annotation.Id;
+import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Bodegas")
+import java.util.List;
+
+@ToString
+@Document(collection = "bodegas")
 public class Bodega {
-    @Id
-    private String id;
-    private String nombreBodega;
-    private Float tamanioBodega;
-    private String sucursalId;  
 
-    public Bodega() {}
+    private String nombre;
+    private double tamañoM2;
+    private List<Producto> productos; 
 
-    public Bodega(String nombreBodega, Float tamanioBodega, String sucursalId) {
-        this.nombreBodega = nombreBodega;
-        this.tamanioBodega = tamanioBodega;
-        this.sucursalId = sucursalId;
+
+    public Bodega() {
     }
 
-    // Getters y setters
-    public String getId() {
-        return id;
+    // Constructor con todos los parámetros
+    public Bodega(String nombre, double tamañoM2, List<Producto> productos) {
+        this.nombre = nombre;
+        this.tamañoM2 = tamañoM2;
+        this.productos = productos;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getNombreBodega() {
-        return nombreBodega;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setNombreBodega(String nombreBodega) {
-        this.nombreBodega = nombreBodega;
+    public double getTamañoM2() {
+        return tamañoM2;
     }
 
-    public Float getTamanioBodega() {
-        return tamanioBodega;
+    public void setTamañoM2(double tamañoM2) {
+        this.tamañoM2 = tamañoM2;
     }
 
-    public void setTamanioBodega(Float tamanioBodega) {
-        this.tamanioBodega = tamanioBodega;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public String getSucursalId() {
-        return sucursalId;
-    }
-
-    public void setSucursalId(String sucursalId) {
-        this.sucursalId = sucursalId;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

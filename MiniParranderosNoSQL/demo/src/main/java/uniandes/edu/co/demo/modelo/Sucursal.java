@@ -1,56 +1,51 @@
 package uniandes.edu.co.demo.modelo;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import java.io.Serializable;
 
-@Document(collection = "Sucursales")
-public class Sucursal implements Serializable {
+import lombok.ToString;
+
+import java.util.List;
+@ToString
+@Document(collection = "sucursales")
+public class Sucursal {
 
     @Id
-    private String idSucursal;
-
-    private String nombreSucursal;
-    private Float tamanioInstalacion;
+    private String id;
+    private String nombre;
     private String direccion;
     private String telefono;
+    private Ciudad ciudad; // Embebido
+    private List<Bodega> bodegas; // Embebido
 
-    @DBRef
-    private Ciudad ciudad;
+    // Constructor sin parámetros
+    public Sucursal() {
+    }
 
-    public Sucursal() {}
-
-    public Sucursal(String nombreSucursal, Float tamanioInstalacion, String direccion, String telefono, Ciudad ciudad) {
-        this.nombreSucursal = nombreSucursal;
-        this.tamanioInstalacion = tamanioInstalacion;
+    // Constructor con todos los parámetros
+    public Sucursal(String id, String nombre, String direccion, String telefono, Ciudad ciudad, List<Bodega> bodegas) {
+        this.id = id;
+        this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.ciudad = ciudad;
+        this.bodegas = bodegas;
     }
 
-    public String getIdSucursal() {
-        return idSucursal;
+    // Getters y Setters
+    public String getId() {
+        return id;
     }
 
-    public void setIdSucursal(String idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getNombreSucursal() {
-        return nombreSucursal;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreSucursal(String nombreSucursal) {
-        this.nombreSucursal = nombreSucursal;
-    }
-
-    public Float getTamanioInstalacion() {
-        return tamanioInstalacion;
-    }
-
-    public void setTamanioInstalacion(Float tamanioInstalacion) {
-        this.tamanioInstalacion = tamanioInstalacion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDireccion() {
@@ -77,15 +72,13 @@ public class Sucursal implements Serializable {
         this.ciudad = ciudad;
     }
 
-    @Override
-    public String toString() {
-        return "Sucursal{" +
-                "idSucursal='" + idSucursal + '\'' +
-                ", nombreSucursal='" + nombreSucursal + '\'' +
-                ", tamanioInstalacion=" + tamanioInstalacion +
-                ", direccion='" + direccion + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", ciudad=" + (ciudad != null ? ciudad.getCodigoCiudad() : "null") +
-                '}';
+    public List<Bodega> getBodegas() {
+        return bodegas;
     }
+
+    public void setBodegas(List<Bodega> bodegas) {
+        this.bodegas = bodegas;
+    }
+
+   
 }

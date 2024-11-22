@@ -1,72 +1,50 @@
 package uniandes.edu.co.demo.modelo;
 
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Date;
 
-@Document(collection = "OrdenesCompra")
+import java.util.List;
+
+@ToString
+@Document(collection = "ordenesCompra")
 public class OrdenCompra {
 
     @Id
-    private String idOrden; // ID único
+    private String id;
+    private String fechaCreacion;
+    private Sucursal sucursal; // Referencia
+    private Proveedor proveedor; // Referencia
+    private List<DetalleOrden> detalle; // Embebido
 
-    private Date fechaCreacion;
-    private String estado;
-    private Date fechaEntrega;
+    // Constructor sin parámetros
+    public OrdenCompra() {
+    }
 
-    @DBRef
-    private Sucursal sucursal;
-
-    @DBRef
-    private Producto producto;
-
-    @DBRef
-    private Proveedor proveedor;
-
-    public OrdenCompra() {}
-
-    public OrdenCompra(String idOrden, Date fechaCreacion, String estado, Date fechaEntrega, Sucursal sucursal, Producto producto, Proveedor proveedor) {
-        this.idOrden = idOrden;
+    // Constructor con todos los parámetros
+    public OrdenCompra(String id, String fechaCreacion, Sucursal sucursal, Proveedor proveedor, List<DetalleOrden> detalle) {
+        this.id = id;
         this.fechaCreacion = fechaCreacion;
-        this.estado = estado;
-        this.fechaEntrega = fechaEntrega;
         this.sucursal = sucursal;
-        this.producto = producto;
         this.proveedor = proveedor;
+        this.detalle = detalle;
     }
 
     // Getters y Setters
-    public String getIdOrden() {
-        return idOrden;
+    public String getId() {
+        return id;
     }
 
-    public void setIdOrden(String idOrden) {
-        this.idOrden = idOrden;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Date getFechaCreacion() {
+    public String getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Date getFechaEntrega() {
-        return fechaEntrega;
-    }
-
-    public void setFechaEntrega(Date fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
     }
 
     public Sucursal getSucursal() {
@@ -77,14 +55,6 @@ public class OrdenCompra {
         this.sucursal = sucursal;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
     public Proveedor getProveedor() {
         return proveedor;
     }
@@ -93,16 +63,11 @@ public class OrdenCompra {
         this.proveedor = proveedor;
     }
 
-    @Override
-    public String toString() {
-        return "OrdenCompra{" +
-                "idOrden='" + idOrden + '\'' +
-                ", fechaCreacion=" + fechaCreacion +
-                ", estado='" + estado + '\'' +
-                ", fechaEntrega=" + fechaEntrega +
-                ", sucursal=" + sucursal +
-                ", producto=" + producto +
-                ", proveedor=" + proveedor +
-                '}';
+    public List<DetalleOrden> getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(List<DetalleOrden> detalle) {
+        this.detalle = detalle;
     }
 }

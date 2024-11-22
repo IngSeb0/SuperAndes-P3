@@ -3,17 +3,16 @@ package uniandes.edu.co.demo.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import uniandes.edu.co.demo.modelo.Proveedor;
+
 import java.util.List;
 
-public interface ProveedorRepository extends MongoRepository<Proveedor, Long> {
+public interface ProveedorRepository extends MongoRepository<Proveedor, String> {
 
-    // Obtener todos los proveedores
-    @Query("{}")
-    List<Proveedor> obtenerTodosLosProveedores();
+  
+    @Query("{'nombre': ?0}")
+    List<Proveedor> findByNombre(String nombre);
 
-    // Obtener proveedor por NIT
-    @Query("{ 'nit': ?0 }")
-    Proveedor obtenerProveedorPorNit(Long nit);
 
-    
+    @Query("{'productos._id': ?0}")
+    List<Proveedor> findByProductoId(String productoId);
 }
