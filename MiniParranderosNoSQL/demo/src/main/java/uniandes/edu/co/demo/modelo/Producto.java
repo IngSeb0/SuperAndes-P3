@@ -14,22 +14,22 @@ public class Producto {
     private double precio;
     private String detallesEmpacado;
     private Categoria categoria;
-    private String fechaVencimiento; // Será nulo si el producto no es perecedero
-    private String sucursalId;       // Referencia a la sucursal
+    private int cantidadDisponible; 
+    private int cantidadMinima;     
 
     public Producto() {}
 
-    public Producto(String id, String nombre, double precio, String detallesEmpacado, Categoria categoria, String fechaVencimiento, String sucursalId) {
+    public Producto(String id, String nombre, double precio, String detallesEmpacado, Categoria categoria, int cantidadDisponible, int cantidadMinima) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.detallesEmpacado = detallesEmpacado;
         this.categoria = categoria;
-        this.fechaVencimiento = fechaVencimiento;
-        this.sucursalId = sucursalId;
+        this.cantidadDisponible = cantidadDisponible;
+        this.cantidadMinima = cantidadMinima;
     }
 
-    // Getters y Setters
+    // Getters y setters
     public String getId() {
         return id;
     }
@@ -70,19 +70,19 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public String getFechaVencimiento() {
-        return fechaVencimiento;
+    public int getCantidadDisponible() {
+        return cantidadDisponible;
     }
 
-    public void setFechaVencimiento(String fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+    public void setCantidadDisponible(int cantidadDisponible) {
+        this.cantidadDisponible = cantidadDisponible;
     }
 
-    public String getSucursalId() {
-        return sucursalId;
+    public int getCantidadMinima() {
+        return cantidadMinima;
     }
 
-    public void setSucursalId(String sucursalId) {
-        this.sucursalId = sucursalId;
+    public void setCantidadMinima(int cantidadMinima) {
+        this.cantidadMinima = cantidadMinima;
     }
 }

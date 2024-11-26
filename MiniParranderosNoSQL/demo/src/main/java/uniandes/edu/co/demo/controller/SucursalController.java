@@ -1,6 +1,8 @@
 package uniandes.edu.co.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uniandes.edu.co.demo.modelo.Sucursal;
 import uniandes.edu.co.demo.repository.SucursalRepository;
@@ -50,10 +52,15 @@ public class SucursalController {
     public void deleteSucursal(@PathVariable String id) {
         sucursalRepository.deleteById(id);
     }
-
-    // RFC2 - Inventario de la sucursal
     @GetMapping("/{id}/inventario")
-    public Map<String, Object> getInventarioSucursal(@PathVariable String id) {
-        return inventarioService.generarInventarioSucursal(id);
+    public ResponseEntity<?> getInventarioSucursal(@PathVariable String id) {
+        try {
+            Map<String, Object> inventario = inventarioService.generarInventarioSucursal(id);
+            return ResponseEntity.ok(inventario);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al obtener el inventario: " + e.getMessage());
+        }
     }
 }

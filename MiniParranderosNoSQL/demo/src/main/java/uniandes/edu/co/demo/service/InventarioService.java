@@ -36,9 +36,9 @@ public class InventarioService {
             Map<String, Object> detalleProductos = new HashMap<>();
             for (Producto producto : bodega.getProductos()) {
                 Map<String, Object> detallesProducto = new HashMap<>();
-                detallesProducto.put("Cantidad", 100); // Simulación: Extraer de la bodega
-                detallesProducto.put("MinimoRequerido", 50); // Simulación: Valor configurado
-                detallesProducto.put("CostoPromedio", 2000.0); // Simulación: Calcular basado en datos reales
+                detallesProducto.put("CantidadDisponible", producto.getCantidadDisponible());
+                detallesProducto.put("CantidadMinima", producto.getCantidadMinima());
+                detallesProducto.put("CostoPromedio", producto.getPrecio());
 
                 detalleProductos.put(producto.getNombre(), detallesProducto);
             }
