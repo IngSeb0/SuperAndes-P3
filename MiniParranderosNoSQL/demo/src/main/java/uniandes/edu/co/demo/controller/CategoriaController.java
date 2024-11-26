@@ -27,18 +27,20 @@ public class CategoriaController {
         }
     }
 
-    // Obtener una categoría por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> obtenerCategoriaPorId(@PathVariable("id") String id) {
+    public ResponseEntity<Categoria> obtenerCategoriaPorCodigo(@PathVariable("id") String id) {
         try {
-            return categoriaRepository.findById(id)
-                    .map(categoria -> new ResponseEntity<>(categoria, HttpStatus.OK))
-                    .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            // Utiliza findByCodigo y verifica que devuelva al menos un resultado
+            List<Categoria> categorias = categoriaRepository.findByCodigo(id);
+            if (categorias.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            // Devuelve el primer elemento de la lista
+            return new ResponseEntity<>(categorias.get(0), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     // Crear una nueva categoría
     @PostMapping
     public ResponseEntity<String> insertarCategoria(@RequestBody Categoria categoria) {

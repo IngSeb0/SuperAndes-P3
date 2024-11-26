@@ -8,12 +8,18 @@ import java.util.List;
 
 public interface ProductoRepository extends MongoRepository<Producto, String> {
 
-    @Query("{'nombre': ?0}")
-    List<Producto> findByNombre(String nombre);
+    @Query("{'precio': {$gte: ?0, $lte: ?1}}")
+    List<Producto> findByPrecioBetween(double precioMin, double precioMax);
+
+    @Query("{'fechaVencimiento': {$gte: ?0}}")
+    List<Producto> findByFechaVencimientoPosterior(String fechaPosterior);
+
+    @Query("{'fechaVencimiento': {$lte: ?0}}")
+    List<Producto> findByFechaVencimientoAnterior(String fechaAnterior);
+
+    @Query("{'sucursalId': ?0}")
+    List<Producto> findBySucursalId(String sucursalId);
 
     @Query("{'categoria.nombre': ?0}")
     List<Producto> findByCategoriaNombre(String categoriaNombre);
-
-    @Query("{'precio': {$gte: ?0, $lte: ?1}}")
-    List<Producto> findByPrecioBetween(double precioMin, double precioMax);
 }

@@ -13,20 +13,22 @@ public class OrdenCompra {
     @Id
     private String id;
     private String fechaCreacion;
-    private Sucursal sucursal; // Referencia
-    private Proveedor proveedor; // Referencia
-    private List<DetalleOrden> detalle; // Embebido
-
-    // Constructor sin parámetros
+    private String sucursalId; 
+    private String proveedorId; 
+    private String estado; 
+    private List<DetalleOrden> detalle; 
+    
     public OrdenCompra() {
+        this.estado = "vigente";
     }
 
-    // Constructor con todos los parámetros
-    public OrdenCompra(String id, String fechaCreacion, Sucursal sucursal, Proveedor proveedor, List<DetalleOrden> detalle) {
+
+    public OrdenCompra(String id, String fechaCreacion, String sucursalId, String proveedorId, String estado, List<DetalleOrden> detalle) {
         this.id = id;
         this.fechaCreacion = fechaCreacion;
-        this.sucursal = sucursal;
-        this.proveedor = proveedor;
+        this.sucursalId = sucursalId;
+        this.proveedorId = proveedorId;
+        this.estado = estado;
         this.detalle = detalle;
     }
 
@@ -47,20 +49,28 @@ public class OrdenCompra {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Sucursal getSucursal() {
-        return sucursal;
+    public String getSucursalId() {
+        return sucursalId;
     }
 
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public void setSucursalId(String sucursalId) {
+        this.sucursalId = sucursalId;
     }
 
-    public Proveedor getProveedor() {
-        return proveedor;
+    public String getProveedorId() {
+        return proveedorId;
     }
 
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
+    public void setProveedorId(String proveedorId) {
+        this.proveedorId = proveedorId;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public List<DetalleOrden> getDetalle() {
