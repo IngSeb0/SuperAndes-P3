@@ -1,6 +1,7 @@
 package uniandes.edu.co.demo.modelo;
 
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -9,22 +10,33 @@ import java.util.List;
 @Document(collection = "bodegas")
 public class Bodega {
 
+    @Id
+    private String id; // Nuevo campo ID
     private String nombre;
     private double tamañoM2;
-    private List<Producto> productos; 
+    private List<Producto> productos;
 
-
+    // Constructor sin parámetros
     public Bodega() {
     }
 
     // Constructor con todos los parámetros
-    public Bodega(String nombre, double tamañoM2, List<Producto> productos) {
+    public Bodega(String id, String nombre, double tamañoM2, List<Producto> productos) {
+        this.id = id;
         this.nombre = nombre;
         this.tamañoM2 = tamañoM2;
         this.productos = productos;
     }
 
     // Getters y Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }

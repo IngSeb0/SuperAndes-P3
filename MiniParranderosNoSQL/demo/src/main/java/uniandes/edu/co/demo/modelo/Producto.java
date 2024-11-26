@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 @Document(collection = "productos")
 public class Producto {
-
+    
     private String nombre;
     private double precio;
     private String detallesEmpacado;
