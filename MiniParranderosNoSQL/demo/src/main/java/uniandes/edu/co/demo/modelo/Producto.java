@@ -14,17 +14,22 @@ public class Producto {
     private double precio;
     private String detallesEmpacado;
     private Categoria categoria;
-    private int cantidadDisponible; 
-    private int cantidadMinima;     
+    private String sucursalId;       // Identificador de la sucursal
+    private String fechaVencimiento; // Fecha de vencimiento
+    private int cantidadDisponible;  // Cantidad actual en inventario
+    private int cantidadMinima;      // Cantidad mínima requerida
 
     public Producto() {}
 
-    public Producto(String id, String nombre, double precio, String detallesEmpacado, Categoria categoria, int cantidadDisponible, int cantidadMinima) {
+    public Producto(String id, String nombre, double precio, String detallesEmpacado, Categoria categoria,
+                    String sucursalId, String fechaVencimiento, int cantidadDisponible, int cantidadMinima) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.detallesEmpacado = detallesEmpacado;
         this.categoria = categoria;
+        this.sucursalId = sucursalId;
+        this.fechaVencimiento = fechaVencimiento;
         this.cantidadDisponible = cantidadDisponible;
         this.cantidadMinima = cantidadMinima;
     }
@@ -68,6 +73,22 @@ public class Producto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getSucursalId() {
+        return sucursalId;
+    }
+
+    public void setSucursalId(String sucursalId) {
+        this.sucursalId = sucursalId;
+    }
+
+    public String getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     public int getCantidadDisponible() {
