@@ -3,6 +3,7 @@ package uniandes.edu.co.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import uniandes.edu.co.demo.modelo.Categoria;
 import uniandes.edu.co.demo.modelo.Producto;
@@ -69,7 +70,7 @@ public class ProductoController {
 
     // Crear un nuevo producto
     @PostMapping
-    public ResponseEntity<String> createProducto(@RequestBody Producto producto) {
+    public ResponseEntity<String> createProducto(@Validated @RequestBody Producto producto) {
         Categoria categoria = categoriaRepository.findByCodigo(producto.getCategoria().getCodigo())
                 .stream().findFirst().orElse(null);
         if (categoria == null) {
