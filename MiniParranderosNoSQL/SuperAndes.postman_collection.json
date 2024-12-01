@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"BODEGA CENTRAL BOGOTÁ\",\r\n    \"tamañoM2\": 1000,\r\n    \"productos\": [{\r\n  \r\n  \"nombre\": \"Leche Entera\",\r\n  \"precio\": 4500.9,\r\n  \"detallesEmpacado\": \"Litro, vence el 2024-12-31, cantidad: 1\",\r\n \r\n  \r\n  \"categoria\": {\r\n    \"codigo\":\"1\",\r\n    \"nombre\":\"Lacteo\",\r\n    \"descripcion\":\"Bebida lactea\"\r\n  }\r\n  }]\r\n\r\n}",
+							"raw": "{\r\n    \"nombre\": \"BODEGA CENTRAL BOGOTÁ\",\r\n    \"tamañoM2\": 1000.0,\r\n    \"productos\": [{\r\n  \r\n  \"nombre\": \"Leche Entera\",\r\n  \"precio\": 4500.9,\r\n  \"detallesEmpacado\": \"Litro, vence el 2024-12-31, cantidad: 1\",\r\n \r\n  \r\n  \"categoria\": {\r\n    \"codigo\":\"1\",\r\n    \"nombre\":\"Lacteo\",\r\n    \"descripcion\":\"Bebida lactea\"\r\n  }\r\n  }]\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,62 +87,6 @@
 					"response": []
 				},
 				{
-					"name": "Indice de ocupación",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\"2\"]\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/parranderos/bodegas/1/ocupacion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"parranderos",
-								"bodegas",
-								"1",
-								"ocupacion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Inventario Bodega",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/parranderos/bodegas/1001/inventario",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"parranderos",
-								"bodegas",
-								"1001",
-								"inventario"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Docs recepcion productos",
 					"request": {
 						"method": "GET",
@@ -200,7 +144,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nit\": 4,\r\n  \"nombre\": \"Proveedor ABC\",\r\n  \"contacto\": \"305834321\",\r\n\"productos\": [{\r\n  \r\n  \"nombre\": \"Leche Entera\",\r\n  \"precio\": 4500.9,\r\n  \"detallesEmpacado\": \"Litro, vence el 2024-12-31, cantidad: 1\",\r\n \r\n  \r\n  \"categoria\": {\r\n    \"codigo\":\"1\",\r\n    \"nombre\":\"Lacteo\",\r\n    \"descripcion\":\"Bebida lactea\"\r\n  }\r\n  }]\r\n\r\n}\r\n\r\n",
+							"raw": "{\r\n  \"nit\": \"2313123\",\r\n  \"nombre\": \"Proveedor CCC\",\r\n  \"contacto\": \"305834321\",\r\n\"productos\": [{\r\n  \r\n  \"nombre\": \"Leche Entera\",\r\n  \"precio\": 4500.9,\r\n  \"detallesEmpacado\": \"Litro, vence el 2024-12-31, cantidad: 1\",\r\n \r\n  \r\n  \"categoria\": {\r\n    \"codigo\":\"1\",\r\n    \"nombre\":\"Lacteo\",\r\n    \"descripcion\":\"Bebida lactea\"\r\n  }\r\n  }]\r\n\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -262,7 +206,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \r\n  \"nombre\": \"Leche Entera\",\r\n  \"precio\": 4500.9,\r\n  \"detallesEmpacado\": \"Litro, vence el 2024-12-31, cantidad: 1\",\r\n \r\n  \r\n  \"categoria\": {\r\n    \"codigo\":31123123,\r\n    \"nombre\":\"Lacteo\",\r\n    \"descripcion\":\"Bebida lactea\"\r\n  }\r\n  }\r\n\r\n",
+							"raw": "{\r\n  \r\n  \"nombre\": \"Leche Entera\",\r\n  \"precio\": 4500.9,\r\n  \"detallesEmpacado\": \"Litro, vence el 2024-12-31, cantidad: 1\",\r\n \r\n  \r\n  \"categoria\": {\r\n    \"codigo\":31123123,\r\n    \"nombre\":\"Lacteo\",\r\n    \"descripcion\":\"Bebida lactea\"\r\n  },\r\n  \"sucursalId\":1\r\n  }\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -344,34 +288,16 @@
 					"response": []
 				},
 				{
-					"name": "Productos con orden de compra",
+					"name": "Buscar producto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/parranderos/producto/ordenes-compra",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"parranderos",
-								"producto",
-								"ordenes-compra"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar producto",
-					"request": {
-						"method": "POST",
-						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"precioMin\": 10.0,\r\n    \"precioMax\":12312312,\r\n\r\n    \r\n     \"sucursalId\":\"1\",\r\n    \"categoriaNombre\": \"Lácteos\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"precioMin\":1,\r\n    \"precioMax\":10000\r\n    \r\n\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
